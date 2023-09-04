@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <div id="reader" style="width: 600px;"></div>
+    <div id="reader" style="width: 300px;"></div>
     <select id="cameras"></select><br>
     <div id="data"></div><br>
     <div id="table-data"></div><br>
@@ -34,7 +34,7 @@
         function startScan()
         {
             let cameraId = $('#cameras').val();
-            html5QrCode.start(cameraId, {fps: 10, qrbox: {width: 250, height: 250}}, (decodedText, decodedResult) => {
+            html5QrCode.start(cameraId, {fps: 10, qrbox: {width: 150, height: 150}}, (decodedText, decodedResult) => {
                 $('#data').text(decodedText);
                 // 查資料
                 $('#table-data').html('姓名：阿昱<br>末四碼：0000<br>桌號：1 桌');
