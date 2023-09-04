@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div id="reader" style="width: 600px;"></div>
+    <select id="cameras"></select>
+    S:<div id="data"></div><br>
+    F:<div id="fail"></div>
+
+    <script>
+        $(function () {
+            Html5Qrcode.getCameras().then(devices => {
+                if (devices && devices.length) {
+                    $.each(devices, function (k, v) {
+                        let optionHtml = '<option value="' + v.id + '">' + v.label + '</option>';
+                        $('#cameras').append(optionHtml);
+                    });
+                }
+            });
+        });
+
+        function onS(decodeText, decodeResult)
+        {
+            $('#data').text(decodeText);
+        }
+
+        function onF(error)
+        {
+            $('#fail').text(error);
+        }
+
+        let html5QrcodeScanner = new html5QrcodeScanner("reader");
+    </script>
+</body>
+</html>
