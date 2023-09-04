@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <div id="reader" style="width: 600px;"></div>
+    <div id="reader" style="width: 300px;"></div>
     <select id="cameras"></select><br>
     S:<div id="data"></div><br>
     F:<div id="fail"></div><br>
@@ -33,7 +33,7 @@
         function startScan()
         {
             let cameraId = $('#cameras').val();
-            html5QrCode.start(cameraId, {fps: 10, qrbox: {width: 250, height: 250}}, (decodedText, decodedResult) => {
+            html5QrCode.start(cameraId, {fps: 10, qrbox: {width: 100, height: 100}}, (decodedText, decodedResult) => {
                 $('#data').text(decodedText);
                 html5QrCode.stop();
             });
