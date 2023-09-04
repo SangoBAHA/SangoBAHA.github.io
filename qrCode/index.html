@@ -9,10 +9,11 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <div id="reader" style="width: 300px;"></div>
+    <div id="reader" style="width: 600px;"></div>
     <select id="cameras"></select><br>
-    S:<div id="data"></div><br>
-    F:<div id="fail"></div><br>
+    <div id="data"></div><br>
+    <div id="table-data"></div><br>
+    <div id="fail"></div><br>
 
     <button type="button" onclick="startScan();">Click me</button>
 
@@ -33,8 +34,10 @@
         function startScan()
         {
             let cameraId = $('#cameras').val();
-            html5QrCode.start(cameraId, {fps: 10, qrbox: {width: 100, height: 100}}, (decodedText, decodedResult) => {
+            html5QrCode.start(cameraId, {fps: 10, qrbox: {width: 250, height: 250}}, (decodedText, decodedResult) => {
                 $('#data').text(decodedText);
+                // 查資料
+                $('#table-data').html('姓名：阿昱<br>末四碼：0000<br>桌號：1 桌');
                 html5QrCode.stop();
             });
         }
@@ -46,6 +49,7 @@
 
         function onF(error)
         {
+            $('#data').text('');
             $('#fail').text(error);
         }
     </script>
