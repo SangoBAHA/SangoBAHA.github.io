@@ -10,11 +10,15 @@
 </head>
 <body>
     <div id="reader" style="width: 600px;"></div>
-    <select id="cameras"></select>
+    <select id="cameras"></select><br>
     S:<div id="data"></div><br>
-    F:<div id="fail"></div>
+    F:<div id="fail"></div><br>
+
+    <button type="button" onclick="startScan();">Click me</button>
 
     <script>
+        const html5QrCode = new Html5Qrcode('reader');
+
         $(function () {
             Html5Qrcode.getCameras().then(devices => {
                 if (devices && devices.length) {
@@ -26,6 +30,15 @@
             });
         });
 
+        function startScan()
+        {
+            let cameraId = $('#cameras').val();
+            html5QrCode.start(cameraId, {fps: 10, qrbox: {width: 250, height: 250}}, (decodedText, decodedResult) => {
+                $('#data').text(decodedText);
+                html5QrCode.stop();
+            });
+        }
+
         function onS(decodeText, decodeResult)
         {
             $('#data').text(decodeText);
@@ -35,8 +48,6 @@
         {
             $('#fail').text(error);
         }
-
-        let html5QrcodeScanner = new html5QrcodeScanner("reader");
     </script>
 </body>
 </html>
